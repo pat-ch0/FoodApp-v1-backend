@@ -54,4 +54,15 @@ public class Storage {
         products.set(index, updatedProduct);
     });
     }
+
+    public void removeProductBarcode(String barcode) {
+Optional<Product> productOptional = products.stream()
+                .filter(product -> product.getBarcode().equals(barcode))
+                .findFirst();
+        if (productOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        productOptional.ifPresent(product -> {
+            products.remove(product);
+        });
+    }
 }

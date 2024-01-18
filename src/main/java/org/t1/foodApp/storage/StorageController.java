@@ -20,30 +20,24 @@ public class StorageController {
 
     @Autowired
     private StorageServiceImpl service;
-    @Operation(summary = "Get All Storages", description = "Récupère tous les espaces de stockage de l'utilisateur")
+  
     @GetMapping()
-    public List<Storage> getStorages(@Parameter(description = "Cookie de l'utilisateur") @UserCookie String userCookie) {
+    public List<Storage> getStorages(@UserCookie String userCookie) {
         return service.findAll(userCookie);
     }
 
-    @Operation(summary = "Get Storage by ID", description = "Récupère un espace de stockage par son ID")
     @GetMapping("/{id}")
-    public Storage getStorageById(@Parameter(description = "Cookie de l'utilisateur") @UserCookie String userCookie,
-                                  @Parameter(description = "ID de l'espace de stockage") @PathVariable String id) {
+    public Storage getStorageById(@PathVariable String id, @UserCookie String userCookie) {
         return service.getStorageById(userCookie, id);
     }
 
-    @Operation(summary = "Remove Storage by ID", description = "Supprime un espace de stockage par son ID")
     @DeleteMapping("/{id}")
-    public void removeStorageById(@Parameter(description = "Cookie de l'utilisateur") @UserCookie String userCookie,
-                                  @Parameter(description = "ID de l'espace de stockage") @PathVariable String id) {
+    public void removeStorageById(@UserCookie String userCookie, @PathVariable String id) {
         service.removeStorageById(userCookie, id);
     }
 
-    @Operation(summary = "Add Storage", description = "Ajoute un nouvel espace de stockage")
-    @PostMapping
-    public Storage addStorage(@Parameter(description = "Cookie de l'utilisateur") @UserCookie String userCookie,
-                              @Parameter(description = "Nouvel espace de stockage") @Validated @RequestBody Storage storage) {
+    @PutMapping
+    public Storage addStorage(@UserCookie String userCookie, @Validated @RequestBody Storage storage) {
         if(service.addStorage(userCookie, storage))
             return storage;
         throw new RuntimeException("Storage not added");

@@ -32,9 +32,10 @@ public class ProductController {
         storageService.updateProductStorage(userCookie, product);
     }
 
-    @DeleteMapping("/{barCode}")
-    public void delete(@UserCookie String userCookie, @PathVariable String barCode) {
-        storageService.removeProductStorage(userCookie, barCode);
+    @DeleteMapping
+    public void delete(@UserCookie String userCookie,
+                       @Validated @RequestBody DeleteProduct product) {
+        storageService.removeProductStorage(userCookie, product);
     }
 
 }

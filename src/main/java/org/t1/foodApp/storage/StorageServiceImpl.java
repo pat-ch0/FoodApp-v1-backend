@@ -3,6 +3,7 @@ package org.t1.foodApp.storage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+import org.t1.foodApp.product.DeleteProduct;
 import org.t1.foodApp.product.Product;
 
 import java.util.*;
@@ -62,13 +63,10 @@ public class StorageServiceImpl {
         storage.updateProduct(product);
     }
 
-    public void removeProductStorage(String userCookie, String productBarCode) {
-        storages.getOrDefault(userCookie, new ArrayList<>()).forEach(storage -> {
-            Optional<Product> productOptional = storage.getProducts().stream()
-                    .filter(p -> p.getBarcode().equals(productBarCode))
-                    .findFirst();
-            productOptional.ifPresent(storage::removeProduct);
-        });
+    public void removeProductStorage(String userCookie, DeleteProduct product) {
+        String storageId = product.getStorageId();
+        Storage storage = getStorageById(userCookie, storageId);
+        storage.removeProductBarcode(product.getBarcode());
     }
 
 
