@@ -29,7 +29,7 @@ public class Storage {
     public void addProduct(Product product){
         if (product == null || product.getStock() <= 0)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product cannot be added");
-        if(!Product.isProductValid(product))
+        if(!product.isProductValid())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product is not valid");
         products.add(product);
     }

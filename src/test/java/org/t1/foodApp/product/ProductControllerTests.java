@@ -75,7 +75,7 @@ public class ProductControllerTests {
                         .cookie(cookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(productJson))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/storages/"+storageId)
                         .cookie(cookie))
@@ -129,7 +129,6 @@ public class ProductControllerTests {
 
     @Test
     public void testGetProductByValidBarcode() throws Exception {
-        // Code-barres valide
         String validBarcode = "737628064502";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/" + validBarcode)
@@ -144,12 +143,11 @@ public class ProductControllerTests {
 
     @Test
     public void testGetProductByInvalidBarcode() throws Exception {
-        // Code-barres invalide
         String invalidBarcode = "invalidBarcode";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/" + invalidBarcode)
                         .cookie(cookie))
-                .andExpect(status().isNotFound()); // Ou autre statut approprié selon votre implémentation
+                .andExpect(status().isNotFound());
     }
 
 

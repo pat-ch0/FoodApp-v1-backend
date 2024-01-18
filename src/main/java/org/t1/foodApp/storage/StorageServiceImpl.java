@@ -50,8 +50,9 @@ public class StorageServiceImpl {
 
     public void addProductStorage(String userCookie, Product product) {
         String storageId = product.getStorageId();
+        if(!product.isProductValid())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not found");
         Storage storage = getStorageById(userCookie, storageId);
-        // if product all ready exists
         if (storage.getProducts().stream().anyMatch(p -> p.getBarcode().equals(product.getBarcode())))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product already exists in storage");
         storage.addProduct(product);

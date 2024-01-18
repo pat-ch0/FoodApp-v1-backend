@@ -38,10 +38,10 @@ public class Product {
     private List<String> allergens;
     private List<String> dietaryRestrictions;
 
-    public static boolean isProductValid(Product product){
-        if(product == null || product.barcode == null || product.barcode.isEmpty())
+    public boolean isProductValid(){
+        if( this.barcode == null || this.barcode.isEmpty())
             return false;
-        return barCodeIsValid(product.barcode);
+        return barCodeIsValid(this.barcode);
     }
     public static boolean barCodeIsValid(String barCode){
         if(barCode == null || barCode.isEmpty())
