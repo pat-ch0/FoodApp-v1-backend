@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.t1.foodApp.annotation.UserCookie;
 import org.t1.foodApp.storage.StorageServiceImpl;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -17,7 +16,7 @@ public class ProductController {
     @Autowired
     private StorageServiceImpl storageService;
     @GetMapping("/{barCode}")
-    public Product getProduct(@PathVariable String barCode) {
+    public ProductDetail getProduct(@PathVariable String barCode) {
         return productService.getProductById(barCode);
     }
 

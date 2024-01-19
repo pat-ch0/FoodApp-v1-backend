@@ -3,6 +3,7 @@ package org.t1.foodApp.api;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.t1.foodApp.product.Product;
+import org.t1.foodApp.product.ProductDetail;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class OpenFoodFacts {
 
-    public static Product fetchProductData(String barCode) {
+    public static ProductDetail fetchProductData(String barCode) {
         try {
             URL url = new URL("https://world.openfoodfacts.org/api/v2/product/" + barCode + ".json");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -32,7 +33,7 @@ public class OpenFoodFacts {
                 JSONObject jsonResponse = new JSONObject(content.toString());
                 if (jsonResponse.getInt("status") == 1) {
                     JSONObject productData = jsonResponse.getJSONObject("product");
-                    Product product = new Product();
+                    ProductDetail product = new ProductDetail();
                     product.setBarcode(barCode);
                     product.setName(productData.optString("product_name"));
                     product.getImageSrcFromJson(productData);

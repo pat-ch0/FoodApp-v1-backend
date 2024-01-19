@@ -23,7 +23,8 @@ public class StorageController {
   
     @GetMapping()
     public List<Storage> getStorages(@UserCookie String userCookie) {
-        return service.findAll(userCookie);
+        var test = service.findAll(userCookie);
+        return test;
     }
 
     @GetMapping("/{id}")

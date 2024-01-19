@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl {
-    public Product getProductById(String id) {
+    public ProductDetail getProductById(String id) {
         var product = OpenFoodFacts.fetchProductData(id);
         if (product == null)
             throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Product not found");
