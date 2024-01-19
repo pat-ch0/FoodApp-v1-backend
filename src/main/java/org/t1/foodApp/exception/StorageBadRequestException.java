@@ -1,8 +1,10 @@
 package org.t1.foodApp.exception;
 
-public class StorageBadRequestException extends RuntimeException {
+import org.springframework.web.server.ResponseStatusException;
+
+public class StorageBadRequestException extends ResponseStatusException {
 
     public StorageBadRequestException(String message) {
-        super(message);
+        super(org.springframework.http.HttpStatus.BAD_REQUEST, message);
     }
 }

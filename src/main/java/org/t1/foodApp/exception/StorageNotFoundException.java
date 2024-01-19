@@ -1,8 +1,10 @@
 package org.t1.foodApp.exception;
 
-public class StorageNotFoundException extends RuntimeException {
+import org.springframework.web.server.ResponseStatusException;
+
+public class StorageNotFoundException extends ResponseStatusException {
 
     public StorageNotFoundException(String message) {
-        super(message);
+        super(org.springframework.http.HttpStatus.NOT_FOUND, message);
     }
 }

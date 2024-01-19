@@ -1,8 +1,10 @@
 package org.t1.foodApp.exception;
 
-public class CookieNotFoundException extends RuntimeException {
+import org.springframework.web.server.ResponseStatusException;
+
+public class CookieNotFoundException extends ResponseStatusException {
 
     public CookieNotFoundException(String cookieName) {
-        super("Cookie '" + cookieName + "' non trouvé dans la requête.");
+        super(org.springframework.http.HttpStatus.NOT_FOUND, "Cookie " + cookieName + " not found");
     }
 }
