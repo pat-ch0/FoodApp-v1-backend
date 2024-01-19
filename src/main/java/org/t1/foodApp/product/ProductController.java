@@ -32,7 +32,7 @@ public class ProductController {
         storageService.updateProductStorage(userCookie, product);
     }
 
-    @DeleteMapping
+    @PostMapping("/delete")
     public void delete(@UserCookie String userCookie,
                        @Validated @RequestBody DeleteProduct product) {
         storageService.removeProductStorage(userCookie, product);
