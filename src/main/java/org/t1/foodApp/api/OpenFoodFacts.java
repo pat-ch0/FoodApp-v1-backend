@@ -35,20 +35,19 @@ public class OpenFoodFacts {
                     Product product = new Product();
                     product.setBarcode(barCode);
                     product.setName(productData.optString("product_name"));
-                    product.setImageSrc(productData.optString("image_front_url"));
+                    product.getImageSrcFromJson(productData);
                     product.setStock(0);
                     product.setPrice(0.0);
                     product.CompositionFromJson(productData);
                     product.setNutriScore(productData.optString("nutriscore_grade"));
                     product.setCarbonFootprint(0.0);
                     product.AllergensFromJson(productData);
-                    product.dietaryRestrictionsJson(productData);
                     return product;
-
                 }
             }
         } catch (Exception e) {
         }
         return null;
     }
+
 }

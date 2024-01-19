@@ -1,7 +1,6 @@
 package org.t1.foodApp.storage;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.t1.foodApp.product.Product;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Getter
@@ -29,7 +27,7 @@ public class Storage {
     public void addProduct(Product product){
         if (product == null || product.getStock() <= 0)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product cannot be added");
-        if(!product.isProductValid())
+        if(product.isProductValid())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product is not valid");
         products.add(product);
     }
