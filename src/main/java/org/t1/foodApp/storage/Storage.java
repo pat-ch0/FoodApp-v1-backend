@@ -21,6 +21,12 @@ public class Storage {
     @NotNull(message = "Label cannot be null")
     @NotBlank(message = "Label cannot be blank")
     private String label;
+    @NotNull(message = "Type cannot be null")
+    @NotBlank(message = "Type cannot be blank")
+    private String type;
+    @NotNull(message = "Image path cannot be null")
+    @NotBlank(message = "Image path cannot be blank")
+    private String img;
 
     private ArrayList<Product> products;
 

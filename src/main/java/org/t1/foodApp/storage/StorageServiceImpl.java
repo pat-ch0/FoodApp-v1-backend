@@ -18,13 +18,16 @@ public class StorageServiceImpl {
     }
 
     public boolean addStorage(String userCookie, Storage storage) {
-        // if name all ready exists
-        if (storages.getOrDefault(userCookie, new ArrayList<>()).stream().anyMatch(s -> s.getLabel().equals(storage.getLabel())))
+        List<Storage> userStorages = storages.getOrDefault(userCookie, new ArrayList<>());
+        if (userStorages.stream().anyMatch(s -> s.getLabel().equals(storage.getLabel()))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Storage name already exists");
-        if(storage.getId() == null || storage.getId().isEmpty())
-            storage.setId(String.valueOf(Math.random()).substring(2, 15));
-        storage.setProducts(new ArrayList<>());
-        storages.computeIfAbsent(userCookie, k -> new ArrayList<>()).add(storage);
+        }
+        if (storage.getId() == null || storage.getId().isEmpty()) {
+            storage.setId(UUID.randomUUID().toString()); // Use UUID for unique ID
+        }
+        storage.setProducts(new ArrayList<>()); // Initialize products list
+        userStorages.add(storage);
+        storages.put(userCookie, userStorages);
         return true;
     }
 
